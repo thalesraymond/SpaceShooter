@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     private const float LeftBoundarie = -9f;
     private const float RightBoundarie = 9f;
 
-    private const float OffScreenLeft = -11f;
-    private const float OffScreenRight = 11f;
+    private const float OffScreenLeft = -11.3f;
+    private const float OffScreenRight = 11.3f;
 
     public bool UseReversableHorizontalPosition = true;
 
@@ -60,10 +60,6 @@ public class Player : MonoBehaviour
 
     private void MovePlayer()
     {
-        //transform.Translate(Vector3.right * this.Speed * Time.deltaTime * Input.GetAxis("Horizontal"));
-
-        //transform.Translate(Vector3.up * this.Speed * Time.deltaTime * Input.GetAxis("Vertical"));
-
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
 
