@@ -9,13 +9,16 @@ public class Player : MonoBehaviour
     private const float TopBoundarie = 0f;
     private const float BottomBoundarie = -3.6f;
 
-    private const float LeftBoundarie = -9f;
-    private const float RightBoundarie = 9f;
+    public const float LeftBoundarie = -9f;
+    public const float RightBoundarie = 9f;
 
     private const float OffScreenLeft = -11.3f;
     private const float OffScreenRight = 11.3f;
 
     public bool UseReversableHorizontalPosition = true;
+    
+    [SerializeField]
+    private int _lives = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,21 @@ public class Player : MonoBehaviour
     void Update()
     {
         this.MovePlayer();
+    }
+
+    public void TakeLife()
+    {
+        this._lives--;
+
+        if(this._lives <= 0 )
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public int GetLives()
+    {
+        return this._lives;
     }
 
     private void ApplyVerticalBoundaries()
