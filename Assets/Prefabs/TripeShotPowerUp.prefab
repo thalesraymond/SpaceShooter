@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7007818566560394411}
   - component: {fileID: 6622988236059088018}
   - component: {fileID: 6835233157293791882}
+  - component: {fileID: 2797840204152475558}
   m_Layer: 30
   m_Name: TripeShotPowerUp
   m_TagString: TripeShotPowerUp
@@ -162,3 +163,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+--- !u!95 &2797840204152475558
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861594133601768676}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d63730219a3c98445ae484fc359f735f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
