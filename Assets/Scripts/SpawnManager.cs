@@ -16,16 +16,30 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyContainer;
 
     [SerializeField]
-    private float minSpawnInterval = 0.5f;
+    private GameObject _powerUpContainer;
 
     [SerializeField]
-    private float maxSpawnInterval = 2f;
+    private GameObject[] _powerUps;
+
+    [SerializeField]
+    private float minEnemySpawnInterval = 0.5f;
+
+    [SerializeField]
+    private float maxEnemySpawnInterval = 2f;
+
+    [SerializeField]
+    private float minPowerUpSpawnInterval = 5f;
+
+    [SerializeField]
+    private float maxPowerUpSpawnInterval = 10f;
 
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpawnEnemies());
+
+        StartCoroutine(SpawnPowerUps());
     }
 
     // Update is called once per frame
@@ -45,11 +59,34 @@ public class SpawnManager : MonoBehaviour
 
         while(player.IsAlive())
         {
-            var nextCheck = Random.Range(this.minSpawnInterval, this.maxSpawnInterval);
+            var nextCheck = Random.Range(this.minEnemySpawnInterval, this.maxEnemySpawnInterval);
 
             var enemyObject = Instantiate(this._enemyPrefab);
 
             enemyObject.transform.parent = this._enemyContainer.transform;
+
+            yield return new WaitForSeconds(nextCheck);
+        }
+    }
+
+    IEnumerator SpawnPowerUps()
+    {
+        var player = this._player.GetComponent<Player>();
+
+        if (player == null)
+        {
+            yield break;
+        }
+
+        while (player.IsAlive())
+        {
+            var nextCheck = Random.Range(this.minPowerUpSpawnInterval, this.maxPowerUpSpawnInterval);
+
+            var powerUpSelector = Random.Range(0, this._powerUps.Length);
+
+            var powerUpObject = Instantiate(this._powerUps[powerUpSelector]);
+
+            powerUpObject.transform.parent = this._powerUpContainer.transform;
 
             yield return new WaitForSeconds(nextCheck);
         }

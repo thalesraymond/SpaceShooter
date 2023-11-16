@@ -32,6 +32,17 @@ public class Player : MonoBehaviour
         this.MovePlayer();
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        switch (other.tag)
+        {
+            case "TripeShotPowerUp":
+                this.gameObject.GetComponent<Shoot>().AddTripeShotAmmo();
+                Destroy(other.gameObject);
+                break;
+        }        
+    }
+
     public void TakeLife()
     {
         this._lives--;

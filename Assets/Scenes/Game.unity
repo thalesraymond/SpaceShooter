@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &417940272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417940273}
+  m_Layer: 30
+  m_Name: PowerUpContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &417940273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417940272}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 651227480}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &495380606
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,8 +187,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _laserPrefab: {fileID: 4379535070069377594, guid: 08e9b2bdf75c1f54f9f972c76fe323ac, type: 3}
+  _tripeLaserPrefab: {fileID: 5665781347333400508, guid: fcdf5f04d8499a943a2c199cabcf6b58, type: 3}
   _laserOffset: 0.9
   _fireRate: 0.2
+  _isTripeShotEnabled: 0
+  _tripeShotAmmo: 0
 --- !u!114 &495380608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,8 +351,13 @@ MonoBehaviour:
   _player: {fileID: 495380606}
   _enemyPrefab: {fileID: 6926601197015032042, guid: cb913cdead173a0499e263d7aad29529, type: 3}
   _enemyContainer: {fileID: 1239185941}
-  minSpawnInterval: 0.5
-  maxSpawnInterval: 2
+  _powerUpContainer: {fileID: 417940272}
+  _powerUps:
+  - {fileID: 1861594133601768676, guid: 2ccfc01398b9ccc499ad7855b3009cbb, type: 3}
+  minEnemySpawnInterval: 0.5
+  maxEnemySpawnInterval: 2
+  minPowerUpSpawnInterval: 5
+  maxPowerUpSpawnInterval: 10
 --- !u!4 &651227480
 Transform:
   m_ObjectHideFlags: 0
@@ -333,6 +372,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1239185942}
+  - {fileID: 417940273}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &703436219
@@ -439,7 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 728074930}
   - component: {fileID: 728074929}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: SpaceBG_Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1239185942}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: EnemyContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
