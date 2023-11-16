@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.Respawn();        
+        this.Spawn();        
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
-        this.Respawn();
+        Destroy(this.gameObject);
     }
 
     private void HandlePlayerCollision(Collider other)
@@ -56,11 +56,11 @@ public class Enemy : MonoBehaviour
 
         if (this.transform.position.y <= -6)
         {
-            this.Respawn();
+            Destroy(this.gameObject);
         }
     }
 
-    private void Respawn()
+    private void Spawn()
     {
         var enemyXPosition = UnityEngine.Random.Range(Player.LeftBoundarie, Player.RightBoundarie);
 

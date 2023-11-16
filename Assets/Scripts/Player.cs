@@ -47,6 +47,11 @@ public class Player : MonoBehaviour
         return this._lives;
     }
 
+    public bool IsAlive()
+    {
+        return this._lives > 0;
+    }
+
     private void ApplyVerticalBoundaries()
     {
         if (this.transform.position.y >= TopBoundarie)
