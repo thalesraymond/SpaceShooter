@@ -8,9 +8,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _speed = 4f;
 
-    [SerializeField]
-    private GameObject _player;
-
 
     // Start is called before the first frame update
     void Start()
@@ -42,9 +39,11 @@ public class Enemy : MonoBehaviour
     private void HandlePlayerCollision(Collider other)
     {
         var player = other.GetComponent<Player>();
+
         if (player != null)
         {
             player.TakeLife();
+
             Debug.Log("Player Lives: " + player.GetLives());
         }
     }
