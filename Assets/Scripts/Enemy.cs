@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         this.MoveEnemy();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         switch(other.tag)
         {
@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void HandlePlayerCollision(Collider other)
+    private void HandlePlayerCollision(Collider2D other)
     {
         var player = other.GetComponent<Player>();
 
