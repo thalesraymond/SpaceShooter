@@ -7,18 +7,17 @@ public class Shoot : MonoBehaviour
     [SerializeField]
     private GameObject _laserPrefab;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private float _laserOffset = 0;
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(this._laserPrefab, this.transform.position, Quaternion.identity);
+            var laserInitialPosition = this.transform.position + new Vector3(0, this._laserOffset, 0);
+
+            Instantiate(this._laserPrefab, laserInitialPosition, Quaternion.identity);
         }
     }
 }
