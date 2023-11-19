@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -20,6 +21,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _gameOverText;
 
+    [SerializeField]
+    private Text _restartText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +32,7 @@ public class UIManager : MonoBehaviour
         this.UpdateScoreText(0);
 
         this._gameOverText.gameObject.SetActive(!this._player.IsAlive());
+        this._restartText.gameObject.SetActive(!this._player.IsAlive());
     }
 
     // Update is called once per frame
@@ -37,6 +42,9 @@ public class UIManager : MonoBehaviour
         this.UpdateDisplayedLives();
 
         this._gameOverText.gameObject.SetActive(!this._player.IsAlive());
+        this._restartText.gameObject.SetActive(!this._player.IsAlive());
+
+        this.CheckForRestart();
     }
 
     private void UpdateScoreText(int score)
@@ -49,5 +57,13 @@ public class UIManager : MonoBehaviour
         var currentPlayerLives = this._player.GetLives();
 
         this._currentLifeCount.sprite = this._liveSprites[currentPlayerLives];
+    }
+
+    private void CheckForRestart()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && this._restartText.IsActive())
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
