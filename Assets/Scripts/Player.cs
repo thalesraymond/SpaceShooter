@@ -18,14 +18,19 @@ public class Player : MonoBehaviour
     public bool UseReversableHorizontalPosition = true;
 
     private const float _boostedSpeed = 10f;
-    
+
+    [SerializeField]
+    private bool _isShieldActive = false;
+
     [SerializeField]
     private int _lives = 3;
 
     // Start is called before the first frame update
     void Start()
     {
-         transform.position = Vector3.zero;
+        transform.position = Vector3.zero;
+
+        StartCoroutine(this.ControlShieldPower());
     }
 
     // Update is called once per frame
@@ -36,9 +41,15 @@ public class Player : MonoBehaviour
 
     public void TakeLife()
     {
+        if (this._isShieldActive)
+        {
+            this._isShieldActive = false;
+            return;
+        }
+
         this._lives--;
 
-        if(this._lives <= 0 )
+        if (this._lives <= 0)
         {
             Destroy(this.gameObject);
         }
@@ -69,7 +80,7 @@ public class Player : MonoBehaviour
         if (this.transform.position.x <= LeftBoundarie)
             transform.position = new Vector3(LeftBoundarie, transform.position.y, 0);
 
-       else if (this.transform.position.x >= RightBoundarie)
+        else if (this.transform.position.x >= RightBoundarie)
             transform.position = new Vector3(RightBoundarie, transform.position.y, 0);
 
     }
@@ -111,5 +122,20 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
 
         this.Speed = 6.0f;
+    }
+    public void EnableShield()
+    {
+        this._isShieldActive = true;
+        //        
+    }
+
+    IEnumerator ControlShieldPower()
+    {
+        while (this.IsAlive())
+        {
+            this.transform.Find("PlayerShield").transform.gameObject.SetActive(this._isShieldActive);
+
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

@@ -41,7 +41,7 @@ public class PowerUp : MonoBehaviour
                 Destroy(this.gameObject);
                 break;
             case PowerUpType.Shield:
-                Debug.Log("SHIELD!!");
+                other.gameObject.GetComponent<Player>().EnableShield();
                 Destroy(this.gameObject);
                 break;                
         }

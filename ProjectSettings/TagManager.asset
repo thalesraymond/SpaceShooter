@@ -8,6 +8,7 @@ TagManager:
   - Laser
   - TripeShotPowerUp
   - PowerUp
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -50,4 +51,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 1691712999
+    locked: 0
+  - name: Player
+    uniqueID: 3707340667
     locked: 0
