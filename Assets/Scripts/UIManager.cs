@@ -11,6 +11,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Player _player;
 
+    [SerializeField]
+    private Sprite[] _liveSprites;
+
+    [SerializeField]
+    private Image _currentLifeCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +29,18 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         this.UpdateScoreText(this._player.Score);
+        this.UpdateDisplayedLives();
     }
 
     private void UpdateScoreText(int score)
     {
         this._scoreText.text = "Score: " + score;
+    }
+
+    private void UpdateDisplayedLives()
+    {
+        var currentPlayerLives = this._player.GetLives();
+
+        this._currentLifeCount.sprite = this._liveSprites[currentPlayerLives];
     }
 }
