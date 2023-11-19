@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     private const float OffScreenRight = 11.3f;
 
     public bool UseReversableHorizontalPosition = true;
+
+    private const float _boostedSpeed = 10f;
     
     [SerializeField]
     private int _lives = 3;
@@ -30,17 +32,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         this.MovePlayer();
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        switch (other.tag)
-        {
-            case "TripeShotPowerUp":
-                this.gameObject.GetComponent<Shoot>().AddTripeShotAmmo();
-                Destroy(other.gameObject);
-                break;
-        }        
     }
 
     public void TakeLife()
@@ -107,5 +98,18 @@ public class Player : MonoBehaviour
             this.ReverseHorizontalPositionWhenOffScreen();
         else
             this.ApplyHorizontalBoundaries();
+    }
+
+    public void EnableSpeedBoost()
+    {
+        this.Speed = _boostedSpeed;
+        StartCoroutine(this.PowerDownSpeedBoost());
+    }
+
+    IEnumerator PowerDownSpeedBoost()
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        this.Speed = 6.0f;
     }
 }

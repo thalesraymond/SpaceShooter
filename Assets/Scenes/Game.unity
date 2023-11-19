@@ -354,6 +354,8 @@ MonoBehaviour:
   _powerUpContainer: {fileID: 417940272}
   _powerUps:
   - {fileID: 1861594133601768676, guid: 2ccfc01398b9ccc499ad7855b3009cbb, type: 3}
+  - {fileID: 1362856580868634223, guid: b508d58157cbaa144bf488118a948346, type: 3}
+  - {fileID: 1054569401930741985, guid: 142959b1e9420aa40a80431afb2506e8, type: 3}
   minEnemySpawnInterval: 0.5
   maxEnemySpawnInterval: 2
   minPowerUpSpawnInterval: 5

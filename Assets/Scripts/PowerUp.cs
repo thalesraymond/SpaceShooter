@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 3f;
+
+    [SerializeField]
+    private PowerUpType _powerUpType;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +21,30 @@ public class PowerUp : MonoBehaviour
     void Update()
     {
         this.Move();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag != "Player") {
+            Debug.Log("Not a player");
+            return;
+        }
+
+        switch(this._powerUpType)
+        {
+            case PowerUpType.TripeShot:
+                other.gameObject.GetComponent<Shoot>().AddTripeShotAmmo();
+                Destroy(this.gameObject);
+                break;
+            case PowerUpType.Speed:
+                other.gameObject.GetComponent<Player>().EnableSpeedBoost();
+                Destroy(this.gameObject);
+                break;
+            case PowerUpType.Shield:
+                Debug.Log("SHIELD!!");
+                Destroy(this.gameObject);
+                break;                
+        }
     }
 
     private void Spawn()
