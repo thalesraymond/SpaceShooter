@@ -8,11 +8,15 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _speed = 4f;
 
+    private Player _player;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        this.Spawn();        
+        this.Spawn();
+
+        this._player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -29,22 +33,30 @@ public class Enemy : MonoBehaviour
                 this.HandlePlayerCollision(other);
                 break;
             case "Laser":
-                Destroy(other.gameObject);
+                this.HandlePlayerLaser(other);
                 break;
         }
 
         Destroy(this.gameObject);
     }
 
+    private void HandlePlayerLaser(Collider2D other)
+    {
+        if (this._player == null)
+            return;
+
+        this._player.AddScore(10);
+        
+        Destroy(other.gameObject);
+    }
+
     private void HandlePlayerCollision(Collider2D other)
     {
-        var player = other.GetComponent<Player>();
-
-        if (player != null)
+        if (this._player != null)
         {
-            player.TakeLife();
+            this._player.TakeLife();
 
-            Debug.Log("Player Lives: " + player.GetLives());
+            Debug.Log("Player Lives: " + this._player.GetLives());
         }
     }
 

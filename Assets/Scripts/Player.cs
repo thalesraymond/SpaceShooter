@@ -25,6 +25,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
 
+    [SerializeField]
+    private int _score = 0;
+
+    public int Score => _score;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -137,5 +142,10 @@ public class Player : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    public void AddScore(int points)
+    {
+        this._score += points;
     }
 }
