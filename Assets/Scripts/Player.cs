@@ -55,9 +55,17 @@ public class Player : MonoBehaviour
 
         this._lives--;
 
-        if (this._lives <= 0)
+        switch(this._lives)
         {
-            Destroy(this.gameObject);
+            case 0:
+                Destroy(this.gameObject);
+                break;
+            case 1:
+                this.transform.Find("FireLeft").gameObject.SetActive(true);
+                break;
+            case 2:
+                this.transform.Find("FireRight").gameObject.SetActive(true);
+                break;
         }
     }
 

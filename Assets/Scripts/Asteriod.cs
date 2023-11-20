@@ -10,10 +10,12 @@ public class Asteriod : MonoBehaviour
     [SerializeField]
     private GameObject _explosion;
 
+    private SpawnManager _spawnManager;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        this._spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
     // Update is called once per frame
@@ -32,6 +34,8 @@ public class Asteriod : MonoBehaviour
         var explosionObject = Instantiate(this._explosion, this.transform.position, Quaternion.identity);
         
         Destroy(other.gameObject);
+
+        this._spawnManager.StartSpawning();
 
         Destroy(this.gameObject, 0.2f);
 

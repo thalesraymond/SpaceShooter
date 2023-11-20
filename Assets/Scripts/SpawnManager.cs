@@ -37,9 +37,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnEnemies());
 
-        StartCoroutine(SpawnPowerUps());
     }
 
     // Update is called once per frame
@@ -48,8 +46,17 @@ public class SpawnManager : MonoBehaviour
        
     }
 
+    public void StartSpawning()
+    {
+        StartCoroutine(SpawnEnemies());
+
+        StartCoroutine(SpawnPowerUps());
+    }
+
     IEnumerator SpawnEnemies()
     {
+        yield return new WaitForSeconds(2.0f);
+
         var player = this._player.GetComponent<Player>();
 
         if(player == null)
@@ -71,6 +78,8 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPowerUps()
     {
+        yield return new WaitForSeconds(2.0f);
+
         var player = this._player.GetComponent<Player>();
 
         if (player == null)
