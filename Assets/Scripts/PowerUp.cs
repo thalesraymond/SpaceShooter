@@ -11,6 +11,9 @@ public class PowerUp : MonoBehaviour
     [SerializeField]
     private PowerUpType _powerUpType;
 
+    [SerializeField]
+    private AudioClip _powerUpSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +48,8 @@ public class PowerUp : MonoBehaviour
                 Destroy(this.gameObject);
                 break;                
         }
+
+        AudioSource.PlayClipAtPoint(this._powerUpSound, this.transform.position);
     }
 
     private void Spawn()

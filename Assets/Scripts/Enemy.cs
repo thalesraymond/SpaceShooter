@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -13,6 +11,9 @@ public class Enemy : MonoBehaviour
     private Player _player;
 
     private Animator _onDeathAnimator;
+
+    [SerializeField]
+    private AudioClip _explosionSound;
 
 
     // Start is called before the first frame update
@@ -44,6 +45,8 @@ public class Enemy : MonoBehaviour
         }
 
         this.GetComponent<BoxCollider2D>().enabled = false;
+
+        AudioSource.PlayClipAtPoint(this._explosionSound, this.transform.position);
 
         Destroy(this.gameObject, 2.8f);
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Shoot : MonoBehaviour
@@ -24,24 +25,32 @@ public class Shoot : MonoBehaviour
     [SerializeField]
     private int _tripeShotAmmo = 0;
 
+    [SerializeField]
+    private AudioClip _laserSound;
 
 
     // Update is called once per frame
     void Update()
     {
+        this.FireLaser();
+    }
+
+    private void FireLaser()
+    {
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > this._canFile)
         {
             this._canFile = Time.time + this._fireRate;
 
-            if(this._isTripeShotEnabled)
+            if (this._isTripeShotEnabled)
             {
                 this.ShootTripleLaser();
             }
             else
             {
                 this.ShootSingleLaser();
-            }     
-            
+            }
+
+            AudioSource.PlayClipAtPoint(this._laserSound, this.transform.position);
         }
     }
 
