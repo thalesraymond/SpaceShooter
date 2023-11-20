@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -10,6 +12,8 @@ public class Enemy : MonoBehaviour
 
     private Player _player;
 
+    private Animator _onDeathAnimator;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +21,8 @@ public class Enemy : MonoBehaviour
         this.Spawn();
 
         this._player = GameObject.Find("Player").GetComponent<Player>();
+
+        this._onDeathAnimator = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -37,7 +43,9 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
-        Destroy(this.gameObject);
+        this.GetComponent<BoxCollider2D>().enabled = false;
+
+        Destroy(this.gameObject, 2.8f);
     }
 
     private void HandlePlayerLaser(Collider2D other)
@@ -46,6 +54,9 @@ public class Enemy : MonoBehaviour
             return;
 
         this._player.AddScore(10);
+
+        this._onDeathAnimator.SetTrigger("OnEnemyDeath");
+
         
         Destroy(other.gameObject);
     }
@@ -55,6 +66,8 @@ public class Enemy : MonoBehaviour
         if (this._player != null)
         {
             this._player.TakeLife();
+
+            this._onDeathAnimator.SetTrigger("OnEnemyDeath");
 
             Debug.Log("Player Lives: " + this._player.GetLives());
         }
