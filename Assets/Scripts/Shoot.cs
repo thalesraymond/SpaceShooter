@@ -50,7 +50,7 @@ public class Shoot : MonoBehaviour
                 this.ShootSingleLaser();
             }
 
-            AudioSource.PlayClipAtPoint(this._laserSound, this.transform.position);
+            //AudioSource.PlayClipAtPoint(this._laserSound, this.transform.position);
         }
     }
 

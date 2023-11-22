@@ -45,6 +45,8 @@ public class UIManager : MonoBehaviour
         this._restartText.gameObject.SetActive(!this._player.IsAlive());
 
         this.CheckForRestart();
+
+        this.CheckForEscape();
     }
 
     private void UpdateScoreText(int score)
@@ -64,6 +66,15 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && this._restartText.IsActive())
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    private void CheckForEscape()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("QUIIIIIIT");
+            Application.Quit();
         }
     }
 }

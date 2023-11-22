@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
 
     public int Score => _score;
 
+    [SerializeField]
+    private AudioClip _explosionSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,18 @@ public class Player : MonoBehaviour
     void Update()
     {
         this.MovePlayer();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        switch (other.tag)
+        {
+            case "EnemyLaser":
+                this.TakeLife();
+                AudioSource.PlayClipAtPoint(this._explosionSound, this.transform.position);
+                Destroy(other.gameObject);
+                break;
+        }
     }
 
     public void TakeLife()

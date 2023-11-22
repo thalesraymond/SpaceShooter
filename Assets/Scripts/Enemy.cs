@@ -15,6 +15,14 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AudioClip _explosionSound;
 
+    [SerializeField]
+    private GameObject _enemyLaser;
+
+    [SerializeField]
+    private float _fireRate = 0.5f;
+
+    private float _canFile = -1f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +38,14 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         this.MoveEnemy();
+        if (Time.time > this._canFile)
+        {
+            _fireRate = UnityEngine.Random.Range(3f, 7f);
+
+            _canFile = Time.time + _fireRate;
+
+            var laserObject = Instantiate(this._enemyLaser, this.transform);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -43,7 +59,10 @@ public class Enemy : MonoBehaviour
                 this.HandlePlayerLaser(other);
                 break;
         }
+    }
 
+    private void ExplodeSelf()
+    {
         this.GetComponent<BoxCollider2D>().enabled = false;
 
         AudioSource.PlayClipAtPoint(this._explosionSound, this.transform.position);
@@ -59,9 +78,10 @@ public class Enemy : MonoBehaviour
         this._player.AddScore(10);
 
         this._onDeathAnimator.SetTrigger("OnEnemyDeath");
-
         
         Destroy(other.gameObject);
+
+        this.ExplodeSelf();
     }
 
     private void HandlePlayerCollision(Collider2D other)
@@ -73,6 +93,8 @@ public class Enemy : MonoBehaviour
             this._onDeathAnimator.SetTrigger("OnEnemyDeath");
 
             Debug.Log("Player Lives: " + this._player.GetLives());
+
+            this.ExplodeSelf();
         }
     }
 
