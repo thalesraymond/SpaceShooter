@@ -34,10 +34,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AudioClip _explosionSound;
 
+    private Animator _moveShipAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
         transform.position = Vector3.zero;
+
+        this._moveShipAnimator = this.GetComponent<Animator>();
 
         StartCoroutine(this.ControlShieldPower());
     }
@@ -127,6 +131,25 @@ public class Player : MonoBehaviour
     {
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
+
+        this._moveShipAnimator.ResetTrigger("Idle");
+
+        if (horizontalInput < 0)
+        {
+            this._moveShipAnimator.ResetTrigger("MovingRight");
+            this._moveShipAnimator.SetTrigger("MovingLeft");
+        }
+        else if (horizontalInput > 0)
+        {
+            this._moveShipAnimator.ResetTrigger("MovingLeft");
+            this._moveShipAnimator.SetTrigger("MovingRight");
+        }
+        else
+        {
+            this._moveShipAnimator.ResetTrigger("MovingLeft");
+            this._moveShipAnimator.ResetTrigger("MovingRight");
+            this._moveShipAnimator.SetTrigger("Idle");
+        }
 
         var movimentVector = this.Speed * Time.deltaTime * new Vector3(horizontalInput, verticalInput);
 
