@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
 
         switch(this._lives)
         {
-            case 0:
+            case 0: 
                 Destroy(this.gameObject);
                 break;
             case 1:
